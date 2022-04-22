@@ -15,28 +15,29 @@ export default function BlogCard() {
         component="img"
         alt="green iguana"
         height="200"
-        objectFit={true}
+        sx={{objectFit:"cover"}}
         image="https://picsum.photos/300/200"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div" color="primary">
+        <Typography  variant="h5" component="div" color="primary">
           Lizard
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        <p>May 17, 2022</p>
+        <span>May 17, 2022</span><br />
+        
           Lizards are a widespread group of squamate reptiles, with over 6,000
           species, ranging across all continents except Antarctica
         </Typography>
         <Typography mt={3} fontSize={22}>
-        <AccountCircle gutterTop variant=""/> <span>aaa@aaa.aaa</span> 
+        <AccountCircle sx={{marginRight:1}}  variant=""/> <span>aaa@aaa.aaa</span> 
         </Typography>
       </CardContent>
       <CardActions>
       <IconButton size='small' aria-label="like">
-      <FavoriteIcon color="secondary"/> <span color="primary">2</span>
+      <FavoriteIcon color="secondary" sx={{marginRight:1}}/> <span color="primary">2</span>
       </IconButton>
       <IconButton size='small' aria-label="like">
-      <ChatBubbleOutlineIcon color="action"/> <span color="primary">2</span>
+      <ChatBubbleOutlineIcon color="action" sx={{marginRight:1}}/> <span color="primary">2</span>
       </IconButton>
       
       </CardActions>
