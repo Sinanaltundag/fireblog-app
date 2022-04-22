@@ -11,8 +11,13 @@ import Details from '../pages/Details'
 import NewBlog from '../pages/NewBlog'
 import Profile from '../pages/Profile'
 import UpdateBlog from '../pages/UpdateBlog'
+import { useDispatch } from 'react-redux'
+import { userObserver } from '../utils/firebase'
 
 const AppRouter = () => {
+  
+
+
   return (
     <>
 <Navbar/>
