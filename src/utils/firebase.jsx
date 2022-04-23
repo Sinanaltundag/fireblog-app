@@ -8,6 +8,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { toast } from "react-toastify";
 
 /* const app = initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_apiKey,
@@ -29,7 +30,6 @@ const firebaseConfig = {
   };
 
   const app = initializeApp(firebaseConfig);
-
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 
@@ -43,6 +43,7 @@ export const login = (email, password) => {
 
 export const logout = () => {
   signOut(auth);
+  toast("Logout successful")
 };
 
 export const loginWithGoogle = () => {
@@ -50,7 +51,7 @@ export const loginWithGoogle = () => {
   signInWithPopup(auth, googleProvider)
     .then((result) => {})
     .catch((error) => {
-      console.log(error);
+      toast("Incorrect password or invalid credentials");
     });
 };
 

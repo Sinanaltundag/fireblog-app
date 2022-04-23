@@ -34,8 +34,8 @@ navigate("/new-blog", {state: {blog}})
       <CardMedia
         component="img"
         alt={title}
-        // height="200"
-        sx={{objectFit:"cover"}}
+        
+        sx={{objectFit:"cover",width:"400px", margin:"0 auto",}}
         image={img}
       />
       <CardContent>

@@ -18,6 +18,7 @@ import Wrapper from "../components/Wrapper";
 import { login, loginWithGoogle } from "../utils/firebase";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
@@ -43,7 +44,7 @@ useEffect(() => {
         navigate("/");
       })
       .catch((error) => {
-        alert(error);
+        toast(`Invalid password or not a valid email`);
       });
   };
   const handleWithGoogle =()=>{

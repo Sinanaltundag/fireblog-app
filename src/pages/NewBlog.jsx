@@ -13,7 +13,7 @@ import Heading from "../components/Heading";
 import blogIcon from "../assets/blok.png";
 import { useSelector } from "react-redux";
 import { AddBlog, EditBlog } from "../utils/dataFunctions";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 
@@ -22,7 +22,7 @@ const NewBlog = () => {
   const [newBlog, setNewBlog] = useState({});
   const { currentUser } = useSelector((state) => state.auth);
   const d = new Date();
-
+const navigate = useNavigate()
   const location= useLocation();
   const blog = location.state?.blog;
  
@@ -35,13 +35,15 @@ const NewBlog = () => {
       [name]: value,
       author: currentUser,
       date: d.toDateString(),
+      like:0,
+      comment:[],
     });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(blog)
-    blog?EditBlog(blog):AddBlog(newBlog)
-    
+    blog?EditBlog({...newBlog, id:blog.id}):AddBlog(newBlog)
+    navigate("/")
   };
   return (
     <Wrapper>

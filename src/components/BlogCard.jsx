@@ -8,13 +8,33 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import {  Box, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { EditBlog } from '../utils/dataFunctions';
+import CommentBox from './CommentBox';
 
 export default function BlogCard({blog}) {
-  const { title,date, img, like, comment, detail, author} = blog
+  let { title,date, img, like, comment, detail, author} = blog
+  // const [openComment, setOpenComment] = useState(false)
+  const {currentUser} = useSelector(state=> state.auth)
   const navigate = useNavigate();
   const handleClick =()=>{
-navigate("/details",{state: {blog} })
+    if (currentUser) {
+      navigate("/details",{state: {blog} })
+    } else{
+      toast("You must Login for see details");
+      navigate("/login");
+    }
+   
   }
+
+const handleLiked =()=>{
+  EditBlog({...blog, like:like+=1})
+}
+const handleComment =()=>{
+// setOpenComment(true)
+}
+
   return (
     <Card sx={{ maxWidth: 345, margin:"auto" }}>
     <Box onClick={handleClick} sx={{cursor: "pointer"}}>
@@ -41,13 +61,13 @@ navigate("/details",{state: {blog} })
         </Typography>
       </CardContent>
       <CardActions>
-      <IconButton size='small' aria-label="like">
+      <IconButton size='small' aria-label="like" onClick={handleLiked}>
       <FavoriteIcon color="secondary" sx={{marginRight:1}}/> <span color="primary">{like}</span>
       </IconButton>
-      <IconButton size='small' aria-label="like">
+      <IconButton size='small' aria-label="like" onClick={handleComment}>
       <ChatBubbleOutlineIcon color="action" sx={{marginRight:1}}/> <span color="primary">{comment}</span>
       </IconButton>
-      
+      <CommentBox blog={blog}/>
       </CardActions>
     </Card>
   );

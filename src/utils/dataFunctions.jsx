@@ -6,10 +6,10 @@ import {
   remove,
   set,
   update,
+
 } from "firebase/database";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setCurrentBlogs } from "../redux/actions/blogActions";
+
 import Toastify from "./toast";
 
 export const AddBlog = (newBlog) => {
@@ -55,6 +55,12 @@ export const EditBlog = (blog) => {
   const db = getDatabase();
   const updates = {};
   updates["blogdata/" + blog.id] = blog;
+//   updates['blogdata/' + blog.id + '/' + newPostKey] = blog;
   Toastify("Record Updated");
   return update(ref(db), updates);
 };
+
+// export function UpdateBlog( data) {
+//     const contactRef = firedb.ref("blogdata").child(data.id);
+//     contactRef.update(data);
+//   }
