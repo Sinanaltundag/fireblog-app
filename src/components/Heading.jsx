@@ -19,6 +19,7 @@ const Heading = ({ title, light }) => {
         justifyContent: "center",
         alignItems: "center",
         color: `${light ? "white" : "#1976D2"}`,
+        margin: "1rem 0",
       }}
     >
       <Cizgi />

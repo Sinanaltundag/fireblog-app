@@ -4,7 +4,7 @@ import React from 'react'
 // import Login from '../pages/Login';
 
 const WrapperBox = styled.div`
-  height: calc(100vh - 64px );
+  min-height: calc(100vh );
   background-image: url("https://picsum.photos/1200/900");
   background-size: cover;
   background-repeat: no-repeat;

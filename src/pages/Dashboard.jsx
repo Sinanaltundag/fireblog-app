@@ -1,30 +1,42 @@
-import { Box,  Grid, Typography } from "@mui/material";
-import React from "react";
+import { Box, Grid, Typography } from "@mui/material";
+
 import BlogCard from "../components/BlogCard";
 import Heading from "../components/Heading";
+import loadingIcon from "../assets/loading.gif"
+import { useFetch } from "../utils/dataFunctions";
+import { useDispatch } from "react-redux";
+import { setCurrentBlogs } from "../redux/actions/blogActions";
 
 const Dashboard = () => {
+  const { isLoading, blogArray } = useFetch();
+  console.log(blogArray);
+  const dispatch = useDispatch()
+  dispatch(setCurrentBlogs(blogArray))
   return (
-    <Box>
-        <Typography variant="h3" component="div" >
-          <Heading title={"Dashboard"} />
-        </Typography>
-      <Box alignItems='center'
-    justify='center'>
-        <Grid
-          textAlign="left"
-          container
-          spacing={{ xs: 1, md: 2 }}
-          alignItems="center"
-  justifyContent="center"
-        >
-          {Array.from(Array(6)).map((_, index) => (
-            <Grid item sm={12} md={6} lg={4} xl={3} key={index}>
-              <BlogCard/>
+    <Box marginTop={10}>
+      {
+        isLoading? <img src={loadingIcon} alt="" />  :
+        <div>
+          <Typography variant="h3" component="div">
+            <Heading title={"Dashboard"} />
+          </Typography>
+          <Box alignItems="center" justify="center">
+            <Grid
+              textAlign="left"
+              container
+              spacing={{ xs: 1, md: 2 }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              {blogArray?.map((blog) => (
+                <Grid item sm={12} md={6} lg={4} xl={3} key={blog.id}>
+                  <BlogCard blog={blog} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </Box>
+          </Box>
+        </div>
+      }
     </Box>
   );
 };

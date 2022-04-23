@@ -4,13 +4,16 @@ import { configureStore } from '@reduxjs/toolkit'
 import authReducer from '../reducers/authReducer';
 import blogReducer from '../reducers/blogReducer';
 
-
+const reducer= {
+    auth: authReducer,
+    blog: blogReducer,
+}
 
 export default  configureStore({
-    reducer: {
-        auth: authReducer,
-        blog: blogReducer,
-    }
+    reducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  devTools: process.env.NODE_ENV !== 'production',
+   
 });
 
 

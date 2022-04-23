@@ -1,14 +1,8 @@
-import { DELETE_BLOG_ITEM, SET_BLOG_ITEM, UPDATE_BLOG_ITEM } from "../types/blogTypes";
+import { SET_CURRENT_BLOGS } from "../types/blogTypes";
 
 
-export const setBlogItem = (blog) => ({
-  type: SET_BLOG_ITEM,
-  payload: blog,
-});
 
-export const deleteBlogItem = () => ({
-  type: DELETE_BLOG_ITEM,
-});
-export const updateBlogItem = () => ({
-  type: UPDATE_BLOG_ITEM,
-});
+export const setCurrentBlogs = (blogArray) => ({
+  type: SET_CURRENT_BLOGS,
+  payload:blogArray,
+})

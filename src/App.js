@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import {  useDispatch } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import AppRouter from "./app-router/AppRouter";
 import "./App.css";
 import { setCurrentUser } from "./redux/actions/authActions";
@@ -22,6 +23,7 @@ function App() {
     
       <BrowserRouter>
         <AppRouter />
+        <ToastContainer/>
       </BrowserRouter>
      
     </div>

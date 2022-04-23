@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
-// import fetchReducer from "./fetchReducer";
-// import blogReducer from "./blogReducer";
-import authReducer from "./authReducer";
 
-const store= ({
-//   app: fetchReducer,
-//   news: blogReducer,
+import authReducer from "./authReducer";
+import blogReducer from "./blogReducer";
+
+const rootReducer = combineReducers({
+  
+  blog: blogReducer,
   auth: authReducer,
 });
-export default store;
+export default rootReducer;

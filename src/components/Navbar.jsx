@@ -3,9 +3,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
+
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { AccountCircle } from "@mui/icons-material";
@@ -13,16 +11,16 @@ import cwLogo from "../assets/cw.jpeg";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Heading from "./Heading";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "@mui/material";
-import { logout, userObserver } from "../utils/firebase";
+
+import { logout } from "../utils/firebase";
 import { clearCurrentUser } from "../redux/actions/authActions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function MenuAppBar() {
   // const [auth, setAuth] = React.useState(false);
-  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
 
@@ -48,7 +46,7 @@ export default function MenuAppBar() {
   }, [user]) */
   
   const {currentUser} = useSelector((state)=>state.auth)
-  // console.log(currentUser)
+
 
 
   const theme = useTheme();
@@ -68,7 +66,7 @@ export default function MenuAppBar() {
           label={currentUser ? "Logout" : "Login"}
         />
       </FormGroup> */}
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Link to={"/"}>
             <img src={cwLogo} alt="" width="40" />
