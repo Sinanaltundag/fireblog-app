@@ -3,9 +3,13 @@ import React from 'react'
 import Wrapper from '../components/Wrapper';
 import blogIcon from '../assets/blok.png'
 import Heading from '../components/Heading';
+import { useSelector } from 'react-redux';
 
 
 const Profile = () => {
+
+  const { currentUser}= useSelector(state => state.auth)  
+
   return (
     <Wrapper>
 
@@ -27,7 +31,7 @@ const Profile = () => {
             <img src={blogIcon} alt="blogIcon"/>
           </Avatar>
           <Typography component="h1" variant="h5" width="100%" >
-          <Heading title={"Login"} />
+          <Heading title={currentUser} />
           </Typography>
           
           

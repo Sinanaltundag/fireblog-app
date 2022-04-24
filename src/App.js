@@ -23,9 +23,19 @@ function App() {
     
       <BrowserRouter>
         <AppRouter />
-        <ToastContainer/>
+        
       </BrowserRouter>
-     
+      <ToastContainer
+position="bottom-left"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
     </div>
   );
 }

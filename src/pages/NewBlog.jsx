@@ -14,6 +14,7 @@ import blogIcon from "../assets/blok.png";
 import { useSelector } from "react-redux";
 import { AddBlog, EditBlog } from "../utils/dataFunctions";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 
@@ -27,7 +28,7 @@ const navigate = useNavigate()
   const blog = location.state?.blog;
  
  
-  const handleChange = (e) => {
+  /* const handleChange = (e) => {
     const { name, value } = e.target;
 
     setNewBlog({
@@ -36,13 +37,37 @@ const navigate = useNavigate()
       author: currentUser,
       date: d.toDateString(),
       like:0,
-      comment:[],
+      comments:[],
     });
-  };
+  }; */
   const handleSubmit = (e) => {
     e.preventDefault();
+    // const { name, value } = e.target;
+    const data = new FormData(e.currentTarget);
+    const {title,detail, img}=({
+      title: data.get("title"),
+      detail: data.get("detail"),
+      img: data.get("img"),
+    });
+
+    const newBlog={
+      // ...newBlog,
+      ...blog,
+      title,
+      detail,
+      img,
+      author: currentUser,
+      date: d.toDateString(),
+    
+    };
+    const updatedBlog={
+      ...blog,
+      title,
+      detail,
+      img,
+      };
     console.log(blog)
-    blog?EditBlog({...newBlog, id:blog.id}):AddBlog(newBlog)
+     blog?EditBlog({...newBlog, id:blog.id}):AddBlog(newBlog)
     navigate("/")
   };
   return (
@@ -82,7 +107,7 @@ const navigate = useNavigate()
             name="title"
             autoComplete="title"
             autoFocus
-            onChange={handleChange}
+            // onChange={handleChange}
             defaultValue={blog?.title}
           />
           <TextField
@@ -93,8 +118,9 @@ const navigate = useNavigate()
             label="Image URL"
             id="img"
             autoComplete="img"
-            onChange={handleChange}
+            // onChange={handleChange}
             defaultValue={blog?.img}
+            // value={blog?.img}
           />
           <TextField
             id="detail"
@@ -104,7 +130,7 @@ const navigate = useNavigate()
             multiline
             rows={8}
             name="detail"
-            onChange={handleChange}
+            // onChange={handleChange}
             defaultValue={blog?.detail}
           />
 

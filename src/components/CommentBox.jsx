@@ -6,13 +6,17 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { IconButton } from "@mui/material";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { EditBlog } from "../utils/dataFunctions";
 import { useState } from "react";
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import { toast } from "react-toastify";
+
+const commentDate = new Date();
+
 
 export default function CommentBox({ blog }) {
   const [open, setOpen] = useState(false);
-  const [comment, setComment] = useState(false);
+  const [comment, setComment] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,14 +29,15 @@ export default function CommentBox({ blog }) {
     setComment(e.target.value)
   };
   const handleComment = () => {
-    blog.comment? EditBlog({...blog, comment: [...blog.comment, comment]}):EditBlog({...blog, comment: [comment]})
+    comment.length>5 ?blog.comments? EditBlog({...blog, comments: [...blog.comments, {commentDate:commentDate.toDateString(),comment:comment}]}):EditBlog({...blog, comments: [{commentDate:commentDate.toDateString(),comment:comment}]}):toast("Min 5 character")
     setOpen(false);
   };
+  let helperText =`10 - 100 character you can write. Remained character: ${100-comment.length}`
   return (
     <div>
       <IconButton size="small" aria-label="like" onClick={handleClickOpen}>
-        <ChatBubbleOutlineIcon color="action" sx={{ marginRight: 1 }} />{" "}
-        <span color="primary">{blog.comment?.length}</span>
+        <AddCommentIcon color="action" sx={{ marginRight: 1 }} />{" "}
+        <span color="primary">{blog.comments?.length||0}</span>
       </IconButton>
 
       <Dialog open={open} onClose={handleClose}>
@@ -55,7 +60,7 @@ export default function CommentBox({ blog }) {
             inputProps={{
               maxLength: 100,
             }}
-            helperText="Max 100 character you can write"
+            helperText={helperText}
             onChange={handleChange}
           />
     

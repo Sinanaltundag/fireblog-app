@@ -10,12 +10,13 @@ import {  Button, ButtonGroup, Container, IconButton } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { DeleteBlog } from '../utils/dataFunctions';
+import Comments from '../components/Comments';
 
 export default function Details() {
   const navigate =useNavigate();
   const location= useLocation();
   const blog = location.state.blog;
-  const {id, title,date, img, like, comment, detail, author} = blog
+  const {id, title,date, img, like, comments, detail, author} = blog
  
   const {currentUser} = useSelector(state=> state.auth)
 console.log(currentUser)
@@ -27,7 +28,6 @@ const handleDelete=()=>{
 const handleUpdate=()=>{
 navigate("/new-blog", {state: {blog}})
 }
-
   return (
     <Container>
     <Card sx={{  margin:"100px auto" }}>
@@ -35,7 +35,7 @@ navigate("/new-blog", {state: {blog}})
         component="img"
         alt={title}
         
-        sx={{objectFit:"cover",width:"400px", margin:"0 auto",}}
+        sx={{objectFit:"cover",height:"300px", width:"400px", margin:"0 auto",}}
         image={img}
       />
       <CardContent>
@@ -47,19 +47,13 @@ navigate("/new-blog", {state: {blog}})
         
           {detail}
         </Typography>
-        <Typography mt={3} fontSize={22}>
+        {comments?.length>0&&<Comments comments={comments}/>}
+        <Typography mt={3} fontSize={22} align="left">
         <AccountCircle sx={{marginRight:1}}  variant=""/> <span>{author}</span> 
+        <span color="primary" style={{float: 'right', fontSize:16}}><FavoriteIcon color="secondary" /> {blog.like?.length}</span>
         </Typography>
       </CardContent>
-      <CardActions>
-      <IconButton size='small' aria-label="like">
-      <FavoriteIcon color="secondary" sx={{marginRight:1}}/> <span color="primary">{like}</span>
-      </IconButton>
-      <IconButton size='small' aria-label="like">
-      <ChatBubbleOutlineIcon color="action" sx={{marginRight:1}}/> <span color="primary">{comment}</span>
-      </IconButton>
-      
-      </CardActions>
+     
     </Card>
     {author===currentUser&&<Container>
     <ButtonGroup variant="outlined" size="large" aria-label="outlined button group" fullWidth sx={{marginTop:5, marginBottom:5}}>

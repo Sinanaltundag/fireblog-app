@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { AccountCircle } from '@mui/icons-material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import {  Box, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -14,7 +13,7 @@ import { EditBlog } from '../utils/dataFunctions';
 import CommentBox from './CommentBox';
 
 export default function BlogCard({blog}) {
-  let { title,date, img, like, comment, detail, author} = blog
+  let { title,date, img, like, detail, author} = blog
   // const [openComment, setOpenComment] = useState(false)
   const {currentUser} = useSelector(state=> state.auth)
   const navigate = useNavigate();
@@ -27,13 +26,10 @@ export default function BlogCard({blog}) {
     }
    
   }
-
 const handleLiked =()=>{
-  EditBlog({...blog, like:like+=1})
+  like?like.includes(currentUser)||EditBlog({...blog, like:[...like,currentUser]}):EditBlog({...blog, like:[currentUser]})
 }
-const handleComment =()=>{
-// setOpenComment(true)
-}
+
 
   return (
     <Card sx={{ maxWidth: 345, margin:"auto" }}>
@@ -62,11 +58,9 @@ const handleComment =()=>{
       </CardContent>
       <CardActions>
       <IconButton size='small' aria-label="like" onClick={handleLiked}>
-      <FavoriteIcon color="secondary" sx={{marginRight:1}}/> <span color="primary">{like}</span>
+      <FavoriteIcon color="secondary" sx={{marginRight:1}}/> <span color="primary">{like?.length||0}</span>
       </IconButton>
-      <IconButton size='small' aria-label="like" onClick={handleComment}>
-      <ChatBubbleOutlineIcon color="action" sx={{marginRight:1}}/> <span color="primary">{comment}</span>
-      </IconButton>
+     
       <CommentBox blog={blog}/>
       </CardActions>
     </Card>

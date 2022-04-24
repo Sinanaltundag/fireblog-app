@@ -9,8 +9,12 @@ import {
 
 } from "firebase/database";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import Toastify from "./toast";
+
+
+
 
 export const AddBlog = (newBlog) => {
   const db = getDatabase();
@@ -18,7 +22,13 @@ export const AddBlog = (newBlog) => {
   const newBlogRef = push(blogRef);
   set(newBlogRef, newBlog);
 };
-
+/* export const AddNewBlog = (newBlog) => {
+  const db = getDatabase();
+  const blogRef = ref(db, `profile/${currentUser.uid}`);
+  const newBlogRef = push(blogRef);
+  set(newBlogRef, newBlog);
+};
+ */
 export const useFetch = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [blogArray, setBlogArray] = useState([]);
@@ -48,7 +58,7 @@ export const useFetch = () => {
 export const DeleteBlog = (id) => {
   const db = getDatabase();
   remove(ref(db, "blogdata/" + id));
-  Toastify("Record Deleted");
+  toast("Record Deleted");
 };
 
 export const EditBlog = (blog) => {
@@ -56,7 +66,7 @@ export const EditBlog = (blog) => {
   const updates = {};
   updates["blogdata/" + blog.id] = blog;
 //   updates['blogdata/' + blog.id + '/' + newPostKey] = blog;
-  Toastify("Record Updated");
+  toast("Record Updated");
   return update(ref(db), updates);
 };
 
