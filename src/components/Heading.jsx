@@ -1,11 +1,21 @@
 import styled from "@emotion/styled";
-import { Box, Typography } from "@mui/material";
+import { Box, createTheme,  ThemeProvider } from "@mui/material";
 import React from "react";
+// import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-const Heading = ({ title, light }) => {
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Girassol',
+      'cursive',
+    ].join(','),
+  },});
+
+
+const Heading = ({ title, color }) => {
   const Cizgi = styled.span`
     display: inline-block;
-    border-top: ${light ? "3px solid  " : "3px solid "};
+    border-top: ${color ? "3px solid  " : "3px solid "};
     height: 0;
     width: 10%;
     margin-bottom: 5px;
@@ -13,13 +23,15 @@ const Heading = ({ title, light }) => {
     
   `;
   return (
+    <ThemeProvider theme={theme}>
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        color: `${light ? "white" : "#1976D2"}`,
+        color: `${color ? color :"primary.dark" }`,
         margin: "1rem 0",
+        fontFamily:"Girassol"
       }}
     >
       <Cizgi />
@@ -28,6 +40,7 @@ const Heading = ({ title, light }) => {
 
       <Cizgi />
     </Box>
+    </ThemeProvider>
   );
 };
 

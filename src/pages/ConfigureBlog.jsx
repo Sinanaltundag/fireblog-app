@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import Wrapper from "../components/Wrapper";
 import Container from "@mui/material/Container";
 import {
@@ -14,13 +14,13 @@ import blogIcon from "../assets/blok.png";
 import { useSelector } from "react-redux";
 import { AddBlog, EditBlog } from "../utils/dataFunctions";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 
 
 
-const NewBlog = () => {
-  const [newBlog, setNewBlog] = useState({});
+
+const ConfigureBlog = () => {
+
   const { currentUser } = useSelector((state) => state.auth);
   const d = new Date();
 const navigate = useNavigate()
@@ -60,12 +60,7 @@ const navigate = useNavigate()
       date: d.toDateString(),
     
     };
-    const updatedBlog={
-      ...blog,
-      title,
-      detail,
-      img,
-      };
+
     console.log(blog)
      blog?EditBlog({...newBlog, id:blog.id}):AddBlog(newBlog)
     navigate("/")
@@ -95,7 +90,7 @@ const navigate = useNavigate()
           <img src={blogIcon} alt="blogIcon" />
         </Avatar>
         <Typography component="h1" variant="h5" width="100%">
-          <Heading title={"New Blog"} />
+          <Heading title={blog?"Update Blog":"New Blog"} />
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -148,4 +143,4 @@ const navigate = useNavigate()
   );
 };
 
-export default NewBlog;
+export default ConfigureBlog;

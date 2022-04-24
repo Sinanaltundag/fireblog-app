@@ -10,34 +10,37 @@ import { EditBlog } from "../utils/dataFunctions";
 import { useState } from "react";
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import { toast } from "react-toastify";
+import { resetPassword } from "../utils/firebase";
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
-const commentDate = new Date();
 
 
-export default function CommentBox({ blog, currentUser }) {
+export default function ResetPassword() {
   const [open, setOpen] = useState(false);
-  const [comment, setComment] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleClickOpen = () => {
-    currentUser&& setOpen(true);
+    setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setEmail("")
   };
   const handleChange = (e) => {
-    setComment(e.target.value)
+    setEmail(e.target.value)
   };
-  const handleComment = () => {
-    comment.length>5 ?blog.comments? EditBlog({...blog, comments: [...blog.comments, {commentDate:commentDate.toDateString(),comment:comment}]}):EditBlog({...blog, comments: [{commentDate:commentDate.toDateString(),comment:comment}]}):toast("Min 5 character")
-    setOpen(false);
+  const handleReset = () => {
+    resetPassword(email)
+    handleClose()
+    toast('An email has been sent')
   };
-  let helperText =`10 - 100 character you can write. Remained character: ${100-comment.length}`
+  
   return (
     <div>
       <IconButton size="small" aria-label="like" onClick={handleClickOpen}>
-        <AddCommentIcon color="action" sx={{ marginRight: 1 }} />{" "}
-        <span color="primary">{blog.comments?.length||0}</span>
+        <RestartAltIcon color="action" sx={{ marginRight: 1 }} />{" "}
+        Forget password?
       </IconButton>
 
       <Dialog open={open} onClose={handleClose}>
@@ -49,25 +52,19 @@ export default function CommentBox({ blog, currentUser }) {
           <TextField
             autoFocus
             margin="dense"
-            multiline
-            rows={4}
-            id="comment"
-            label="Your Comment"
-            type="text"
+            id="name"
+            label="Email Address"
+            type="email"
             fullWidth
             variant="standard"
-            //! input max character 
-            inputProps={{
-              maxLength: 100,
-            }}
-            helperText={helperText}
             onChange={handleChange}
+            value={email}
           />
     
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleComment}>Send</Button>
+          <Button onClick={handleReset}>Send</Button>
         </DialogActions>
       </Dialog>
     </div>

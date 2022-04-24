@@ -11,7 +11,7 @@ import cwLogo from "../assets/cw.jpeg";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Heading from "./Heading";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from "../utils/firebase";
@@ -19,14 +19,12 @@ import { clearCurrentUser } from "../redux/actions/authActions";
 import { useState } from "react";
 
 export default function MenuAppBar() {
-  // const [auth, setAuth] = React.useState(false);
+
 
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  // const handleChange = (event) => {
-  //   setAuth(event.target.checked);
-  // };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,13 +35,11 @@ export default function MenuAppBar() {
   };
   const handleLogout =()=>{
     logout();
-    handleClose();
     dispatch(clearCurrentUser)
+    handleClose();
+    navigate("/")
   }
- /*  const user= userObserver()
-  useEffect(() => {
-    console.log(user)
-  }, [user]) */
+
   
   const {currentUser} = useSelector((state)=>state.auth)
 
@@ -54,18 +50,7 @@ export default function MenuAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={currentUser ? "Logout" : "Login"}
-        />
-      </FormGroup> */}
+ 
       <AppBar position="fixed">
         <Toolbar>
           <Link to={"/"}>
@@ -74,7 +59,7 @@ export default function MenuAppBar() {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
            {matches&&(
             <Link to={"/"}>
-             <Heading title={"<Sinan/> Blog"} light/>
+             <Heading title={"<Sinan/> Blog"} color="white"/>
              </Link>
            ) }
           </Typography>

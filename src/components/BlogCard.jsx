@@ -27,7 +27,10 @@ export default function BlogCard({blog}) {
    
   }
 const handleLiked =()=>{
-  like?like.includes(currentUser)||EditBlog({...blog, like:[...like,currentUser]}):EditBlog({...blog, like:[currentUser]})
+  if (currentUser) {
+    like?like.includes(currentUser)||EditBlog({...blog, like:[...like,currentUser]}):EditBlog({...blog, like:[currentUser]})
+    
+  }
 }
 
 
@@ -61,7 +64,7 @@ const handleLiked =()=>{
       <FavoriteIcon color="secondary" sx={{marginRight:1}}/> <span color="primary">{like?.length||0}</span>
       </IconButton>
      
-      <CommentBox blog={blog}/>
+      <CommentBox blog={blog} currentUser={currentUser}/>
       </CardActions>
     </Card>
   );

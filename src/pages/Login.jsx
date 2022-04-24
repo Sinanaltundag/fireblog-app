@@ -15,10 +15,13 @@ import blogIcon from "../assets/blok.png";
 import { Link, useNavigate } from "react-router-dom";
 import Heading from "../components/Heading";
 import Wrapper from "../components/Wrapper";
-import { login, loginWithGoogle } from "../utils/firebase";
+import { login, loginWithGoogle, resetPassword } from "../utils/firebase";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import ResetPassword from "../components/ResetPassword";
+import { IconButton } from "@mui/material";
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 const theme = createTheme();
 
@@ -132,14 +135,16 @@ padding: " 10px 0"
               </Button>
             <Grid container>
               <Grid item xs>
-                <Link to={"/"}>
-                  Forgot password?
-                </Link>
+                <ResetPassword/>
               </Grid>
-              <Grid item>
-                <Link to={"/register"}>
-                  {"Don't have an account? Sign Up"}
+              <Grid item xs>
+              <IconButton size="small" aria-label="like" >
+        <AppRegistrationIcon color="action" sx={{ marginRight: 1 }} />{" "}
+        <Link to={"/register"}>
+                  {"Sign Up"}
                 </Link>
+      </IconButton>
+               
               </Grid>
             </Grid>
           </Box>

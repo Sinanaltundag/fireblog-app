@@ -12,9 +12,10 @@ import blogIcon from "../assets/blok.png";
 
 import Heading from "../components/Heading";
 import Wrapper from "../components/Wrapper";
-import { login, loginWithGoogle, register } from "../utils/firebase";
+import { loginWithGoogle, register } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
@@ -41,7 +42,7 @@ React.useEffect(() => {
       navigate("/");
     })
     .catch((error) => {
-      alert(error);
+      toast(error);
     });
     console.log(user)
   };
