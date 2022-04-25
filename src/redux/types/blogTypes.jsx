@@ -1,1 +1,2 @@
 export const SET_CURRENT_BLOGS = 'SET_CURRENT_BLOGS'
+export const SET_IS_LOADING = 'SET_IS_LOADING'

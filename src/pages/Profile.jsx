@@ -13,7 +13,6 @@ import Wrapper from "../components/Wrapper";
 import blogIcon from "../assets/blok.png";
 import Heading from "../components/Heading";
 import { useSelector } from "react-redux";
-import { useFetch } from "../utils/dataFunctions";
 import loadingIcon from "../assets/loading.gif";
 import { useNavigate } from "react-router-dom";
 
@@ -21,21 +20,21 @@ const Profile = () => {
   const [favoriteBlogs, setFavoriteBlogs] = useState([]);
   const [selfPostBlogs, setSelfPostBlogs] = useState([]);
   const { currentUser } = useSelector((state) => state.auth);
+  const { blogList, isLoading } = useSelector((state) => state.blog);
   const navigate = useNavigate();
-  const { isLoading, blogArray } = useFetch();
 
   useEffect(() => {
-    if (blogArray.length > 0) {
-      const userLikes = blogArray?.filter((blog) =>
+    if (blogList) {
+      const userLikes = blogList?.filter((blog) =>
         blog.like?.includes(currentUser?.email)
       );
       setFavoriteBlogs(userLikes);
-      const userPosts = blogArray?.filter(
+      const userPosts = blogList?.filter(
         (blog) => blog.author === currentUser?.email
       );
       setSelfPostBlogs(userPosts);
     }
-  }, [blogArray, currentUser]);
+  }, [blogList, currentUser]);
 
   return (
     <Wrapper>
@@ -62,7 +61,7 @@ const Profile = () => {
             <Avatar
               sx={{ m: 1, bgcolor: "primary.dark", height: 250, width: 250 }}
             >
-              <img src={blogIcon} alt="blogIcon" />
+              <img src={currentUser.photoURL || blogIcon} alt="blogIcon" />
             </Avatar>
             <Typography component="h1" variant="h3" width="100%">
               <Heading title={currentUser?.displayName} />

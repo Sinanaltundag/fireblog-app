@@ -20,17 +20,15 @@ export const AddBlog = (newBlog) => {
 export const useFetch = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [blogArray, setBlogArray] = useState([]);
+  
 
   useEffect(() => {
     setIsLoading(true);
-
     const db = getDatabase();
     const blogRef = ref(db, "blogdata");
-
     onValue(blogRef, (snapshot) => {
       const data = snapshot.val();
       const blogs = [];
-
       for (let id in data) {
         blogs.push({ id, ...data[id] });
       }

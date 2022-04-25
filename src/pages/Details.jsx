@@ -45,7 +45,6 @@ export default function Details() {
           <Typography variant="body2" color="text.secondary">
             <span>{date}</span>
             <br />
-
             {detail}
           </Typography>
           {comments?.length > 0 && <Comments comments={comments} />}
