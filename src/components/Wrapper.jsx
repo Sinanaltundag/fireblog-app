@@ -1,7 +1,6 @@
 
 import styled from '@emotion/styled';
 import React from 'react'
-// import Login from '../pages/Login';
 
 const WrapperBox = styled.div`
   min-height: calc(100vh );
