@@ -48,7 +48,7 @@ export default function MenuAppBar() {
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('md'));
-
+console.log(currentUser?.displayName);
   return (
     <Box sx={{ flexGrow: 1 }}>
  
