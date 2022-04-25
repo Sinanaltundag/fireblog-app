@@ -4,7 +4,6 @@ import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Navbar from "../components/Navbar";
 import Register from "../pages/Register";
-import About from "../pages/About";
 import Page404 from "../helpers/Page404";
 import PrivateRouter from "./PrivateRouter";
 import Details from "../pages/Details";
