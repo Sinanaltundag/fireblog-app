@@ -32,9 +32,8 @@ export default function Details() {
           component="img"
           alt={title}
           sx={{
-            objectFit: "cover",
+            objectFit: "scale-down",
             height: "300px",
-            width: "400px",
             margin: "0 auto",
           }}
           image={img}

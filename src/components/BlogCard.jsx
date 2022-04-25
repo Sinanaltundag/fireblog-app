@@ -41,7 +41,7 @@ const handleLiked =()=>{
         component="img"
         alt={title}
         height="200"
-        sx={{objectFit:"cover"}}
+        sx={{objectFit:"scale-down"}}
         image={img}
         
       />
