@@ -1,20 +1,19 @@
-import { CLEAR_CURRENT_USER, SET_CURRENT_USER } from "../types/authTypes"
+import { CLEAR_CURRENT_USER, SET_CURRENT_USER } from "../types/authTypes";
 
 const initialState = {
-    currentUser:"",
-}
+  currentUser: "",
+};
 
-const authReducer= (state = initialState, { type, payload }) => {
+const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case SET_CURRENT_USER:
+      return { ...state, currentUser: payload };
+    case CLEAR_CURRENT_USER:
+      return initialState.currentUser;
 
-  case SET_CURRENT_USER:
-    return { ...state, currentUser: payload }
-  case CLEAR_CURRENT_USER:
-    return initialState.currentUser
-
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};
 
-export default authReducer
+export default authReducer;

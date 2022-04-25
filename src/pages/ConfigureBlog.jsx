@@ -1,58 +1,39 @@
-
 import Wrapper from "../components/Wrapper";
 import Container from "@mui/material/Container";
-import {
-  Avatar,
-  Box,
-  Button,
-  
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
 import Heading from "../components/Heading";
 import blogIcon from "../assets/blok.png";
 import { useSelector } from "react-redux";
 import { AddBlog, EditBlog } from "../utils/dataFunctions";
 import { useLocation, useNavigate } from "react-router-dom";
 
-
-
-
-
 const ConfigureBlog = () => {
-
   const { currentUser } = useSelector((state) => state.auth);
   const d = new Date();
-const navigate = useNavigate()
-  const location= useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const blog = location.state?.blog;
- 
- 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const { name, value } = e.target;
     const data = new FormData(e.currentTarget);
-    const {title,detail, img}=({
+    const { title, detail, img } = {
       title: data.get("title"),
       detail: data.get("detail"),
       img: data.get("img"),
-    });
+    };
 
-    const newBlog={
-      // ...newBlog,
+    const newBlog = {
       ...blog,
       title,
       detail,
       img,
       author: currentUser?.email,
       date: d.toDateString(),
-    
     };
 
-    console.log(blog)
-     blog?EditBlog({...newBlog, id:blog.id}):AddBlog(newBlog)
-    navigate("/")
+    blog ? EditBlog({ ...newBlog, id: blog.id }) : AddBlog(newBlog);
+    navigate("/");
   };
   return (
     <Wrapper>
@@ -79,7 +60,7 @@ const navigate = useNavigate()
           <img src={blogIcon} alt="blogIcon" />
         </Avatar>
         <Typography component="h1" variant="h5" width="100%">
-          <Heading title={blog?"Update Blog":"New Blog"} />
+          <Heading title={blog ? "Update Blog" : "New Blog"} />
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -91,7 +72,6 @@ const navigate = useNavigate()
             name="title"
             autoComplete="title"
             autoFocus
-            // onChange={handleChange}
             defaultValue={blog?.title}
           />
           <TextField
@@ -102,9 +82,7 @@ const navigate = useNavigate()
             label="Image URL"
             id="img"
             autoComplete="img"
-            // onChange={handleChange}
             defaultValue={blog?.img}
-            // value={blog?.img}
           />
           <TextField
             id="detail"
@@ -114,7 +92,6 @@ const navigate = useNavigate()
             multiline
             rows={8}
             name="detail"
-            // onChange={handleChange}
             defaultValue={blog?.detail}
           />
 
@@ -124,7 +101,7 @@ const navigate = useNavigate()
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            {blog?"Update Blog":"Add New Blog"}
+            {blog ? "Update Blog" : "Add New Blog"}
           </Button>
         </Box>
       </Container>

@@ -19,13 +19,10 @@ import { toast } from "react-toastify";
 
 const theme = createTheme();
 
-
-
 export default function Login() {
- 
- const { currentUser } = useSelector(state => state.auth)
-  const navigate = useNavigate()
-React.useEffect(() => {
+  const { currentUser } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  React.useEffect(() => {
     if (currentUser) {
       navigate("/");
     }
@@ -33,22 +30,21 @@ React.useEffect(() => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const user ={
+    const user = {
       email: data.get("email"),
       password: data.get("password"),
     };
     register(user.email, user.password)
-    .then(() => {
-      navigate("/");
-    })
-    .catch((error) => {
-      toast(error);
-    });
-    console.log(user)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        toast(error);
+      });
   };
-  const handleWithGoogle =()=>{
-    loginWithGoogle()
-  }
+  const handleWithGoogle = () => {
+    loginWithGoogle();
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,7 +56,7 @@ React.useEffect(() => {
             backgroundColor: "white",
             borderRadius: "1rem",
             boxShadow: "10px 10px 5px 1px black",
-            padding: "10px 0"
+            padding: "10px 0",
           }}
         >
           <CssBaseline />
@@ -128,8 +124,12 @@ React.useEffect(() => {
                 >
                   with
                 </Typography>
-                <img src={googleIcon} alt="google" height="36"
-                onClick={handleWithGoogle} />
+                <img
+                  src={googleIcon}
+                  alt="google"
+                  height="36"
+                  onClick={handleWithGoogle}
+                />
               </Button>
             </Box>
           </Box>

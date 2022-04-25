@@ -45,7 +45,7 @@ export const login = (email, password) => {
 
 export const logout = () => {
   signOut(auth);
-  toast("Logout successful")
+  toast("Logout successful");
 };
 
 export const loginWithGoogle = () => {
@@ -58,27 +58,26 @@ export const loginWithGoogle = () => {
 };
 
 export const userObserver = () => {
-    onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-// currentUser verisi bir obje. içindekiler kullanılabilir
-        return(currentUser?.email);
-        // aktif kullanıcının emailini döndürdüm
-      } else {
-        // User is signed out
-        console.log("user logout")
-        return("");
-      }
-    });
-  };
-
-export const resetPassword =(email)=>{
-  sendPasswordResetEmail(auth, email)
-  .then(() => {
-    toast("An email has been sent for reset your password!")
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    toast(errorCode+errorMessage)
+  onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
+      // currentUser verisi bir obje. içindekiler kullanılabilir
+      return currentUser?.email;
+      // aktif kullanıcının emailini döndürdüm
+    } else {
+      // User is signed out
+      return "";
+    }
   });
-}
+};
+
+export const resetPassword = (email) => {
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      toast("An email has been sent for reset your password!");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      toast(errorCode + errorMessage);
+    });
+};
