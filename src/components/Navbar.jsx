@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../utils/firebase";
 import { clearCurrentUser } from "../redux/actions/authActions";
 import { useState } from "react";
+import { Avatar } from "@mui/material";
 
 export default function MenuAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -66,7 +67,8 @@ export default function MenuAppBar() {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+            <Avatar alt={currentUser?.displayName} src={currentUser?.photoURL} />
+              
             </IconButton>
             {currentUser ? (
               <Menu
