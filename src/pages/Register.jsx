@@ -12,7 +12,7 @@ import blogIcon from "../assets/blok.png";
 
 import Heading from "../components/Heading";
 import Wrapper from "../components/Wrapper";
-import { loginWithGoogle, register } from "../utils/firebase";
+import { loginWithGoogle, register, updateUserProfile } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -31,13 +31,18 @@ export default function Login() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user = {
+      displayName: data.get("displayName"),
       email: data.get("email"),
       password: data.get("password"),
+      photoURL: data.get("photoURL"),
     };
     register(user.email, user.password)
       .then(() => {
-        navigate("/");
-      })
+        updateUserProfile(user.displayName,user.photoURL)
+        
+      }).then(()=>
+        navigate("/")
+      )
       .catch((error) => {
         toast(error);
       });
@@ -85,11 +90,22 @@ export default function Login() {
                 margin="normal"
                 required
                 fullWidth
+                id="text"
+                label="Name"
+                name="displayName"
+                autoComplete="displayName"
+                autoFocus
+              />
+              
+              <TextField
+                margin="normal"
+                required
+                fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
+                
               />
               <TextField
                 margin="normal"
@@ -100,6 +116,15 @@ export default function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                name="photoURL"
+                label="Your Photo"
+                type="url"
+                id="photoURL"
+                autoComplete="photoURL"
               />
 
               <Button

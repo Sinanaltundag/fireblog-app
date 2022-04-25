@@ -1,13 +1,14 @@
-import { setCurrentBlogs } from "../actions/blogActions";
+
+import { SET_CURRENT_BLOGS } from "../types/blogTypes";
 
 const initialState = {
-  blogArray: [],
+  blogList: [],
 };
 
 const blogReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case setCurrentBlogs:
-      return { ...state, blogArray: payload };
+    case SET_CURRENT_BLOGS:
+      return { ...state, blogList: payload };
 
     default:
       return state;

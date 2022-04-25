@@ -35,7 +35,7 @@ export default function MenuAppBar() {
   };
   const handleLogout =()=>{
     logout();
-    dispatch(clearCurrentUser)
+    dispatch(clearCurrentUser())
     console.log(currentUser)
     handleClose();
     navigate("/")

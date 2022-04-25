@@ -8,6 +8,7 @@ import {
   signOut,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  updateProfile,
 } from "firebase/auth";
 import { toast } from "react-toastify";
 
@@ -53,9 +54,18 @@ export const loginWithGoogle = () => {
   signInWithPopup(auth, googleProvider)
     .then((result) => {})
     .catch((error) => {
-      toast("Incorrect password or invalid credentials");
+      toast(`Incorrect password or invalid credentials: ${error.message}`);
     });
 };
+export const updateUserProfile =(displayName,photoURL)=>{
+  updateProfile(auth.currentUser, {
+    displayName: displayName, 
+    photoURL: photoURL
+  
+  }).catch((error) => {
+    toast(error)
+  });
+}
 
 export const userObserver = () => {
   onAuthStateChanged(auth, (currentUser) => {
