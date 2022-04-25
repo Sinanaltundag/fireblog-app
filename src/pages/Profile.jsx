@@ -25,9 +25,9 @@ const Profile = () => {
   const { isLoading, blogArray } = useFetch();
 
   useEffect(() => {
-    if (blogArray.length > 1) {
+    if (blogArray.length > 0) {
       const userLikes = blogArray?.filter((blog) =>
-        blog.like.includes(currentUser?.email)
+        blog.like?.includes(currentUser?.email)
       );
       setFavoriteBlogs(userLikes);
       const userPosts = blogArray?.filter(
