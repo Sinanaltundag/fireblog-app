@@ -19,12 +19,13 @@ const navigate=useNavigate()
 
   useEffect(() => {
     if (blogArray.length > 1) {
-      const userLikes = blogArray?.filter((blog) =>blog.like.includes(currentUser));
+      const userLikes = blogArray?.filter((blog) =>blog.like.includes(currentUser?.email));
       setFavoriteBlogs(userLikes);
-      const userPosts = blogArray?.filter((blog)=> blog.author===currentUser);
+      const userPosts = blogArray?.filter((blog)=> blog.author===currentUser?.email);
       setSelfPostBlogs(userPosts)
     }
   }, [blogArray, currentUser]);
+  // }, [blogArray, currentUser]);
 
   return (
     <Wrapper>
@@ -54,7 +55,7 @@ const navigate=useNavigate()
               <img src={blogIcon} alt="blogIcon" />
             </Avatar>
             <Typography component="h1" variant="h3" width="100%">
-              <Heading title={currentUser} />
+              <Heading title={currentUser?.displayName} />
         
             </Typography>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>

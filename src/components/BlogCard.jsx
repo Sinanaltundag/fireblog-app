@@ -28,7 +28,7 @@ export default function BlogCard({blog}) {
   }
 const handleLiked =()=>{
   if (currentUser) {
-    like?like.includes(currentUser)||EditBlog({...blog, like:[...like,currentUser]}):EditBlog({...blog, like:[currentUser]})
+    like?like.includes(currentUser?.email)||EditBlog({...blog, like:[...like,currentUser?.email]}):EditBlog({...blog, like:[currentUser?.email]})
     
   }
 }

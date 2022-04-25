@@ -61,7 +61,7 @@ export const userObserver = () => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
 // currentUser verisi bir obje. içindekiler kullanılabilir
-        return(currentUser.email);
+        return(currentUser?.email);
         // aktif kullanıcının emailini döndürdüm
       } else {
         // User is signed out

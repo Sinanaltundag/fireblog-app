@@ -28,18 +28,7 @@ const navigate = useNavigate()
   const blog = location.state?.blog;
  
  
-  /* const handleChange = (e) => {
-    const { name, value } = e.target;
 
-    setNewBlog({
-      ...newBlog,
-      [name]: value,
-      author: currentUser,
-      date: d.toDateString(),
-      like:0,
-      comments:[],
-    });
-  }; */
   const handleSubmit = (e) => {
     e.preventDefault();
     // const { name, value } = e.target;
@@ -56,7 +45,7 @@ const navigate = useNavigate()
       title,
       detail,
       img,
-      author: currentUser,
+      author: currentUser?.email,
       date: d.toDateString(),
     
     };

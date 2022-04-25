@@ -36,6 +36,7 @@ export default function MenuAppBar() {
   const handleLogout =()=>{
     logout();
     dispatch(clearCurrentUser)
+    console.log(currentUser)
     handleClose();
     navigate("/")
   }
@@ -64,7 +65,7 @@ export default function MenuAppBar() {
            ) }
           </Typography>
             <Typography variant="h5" >
-              {currentUser}
+              {currentUser?.displayName}
             </Typography>
             <div>
             

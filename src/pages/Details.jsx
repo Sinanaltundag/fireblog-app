@@ -19,7 +19,7 @@ export default function Details() {
   const {id, title,date, img, like, comments, detail, author} = blog
  
   const {currentUser} = useSelector(state=> state.auth)
-console.log(currentUser)
+console.log(currentUser?.email)
 
 const handleDelete=()=>{
   DeleteBlog(id);
@@ -55,7 +55,7 @@ navigate("/new-blog", {state: {blog}})
       </CardContent>
      
     </Card>
-    {author===currentUser&&<Container>
+    {author===currentUser?.email&&<Container>
     <ButtonGroup variant="outlined" size="large" aria-label="outlined button group" fullWidth sx={{marginTop:5, marginBottom:5}}>
         <Button color="info" onClick={handleUpdate}>Update</Button>
         <Button color="error" onClick={handleDelete}>Delete</Button>

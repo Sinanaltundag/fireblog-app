@@ -1,7 +1,7 @@
 import { CLEAR_CURRENT_USER, SET_CURRENT_USER } from "../types/authTypes"
 
 const initialState = {
-    currentUser:"",
+    currentUser:null,
 }
 
 const authReducer= (state = initialState, { type, payload }) => {
