@@ -25,7 +25,7 @@ const Dashboard = () => {
               alignItems="center"
               justifyContent="center"
             >
-              {blogList?.map((blog) => (
+              {blogList.map((blog) => (
                 <Grid item sm={12} md={6} lg={4} xl={3} key={blog.id}>
                   <BlogCard blog={blog} />
                 </Grid>

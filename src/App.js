@@ -16,6 +16,8 @@ function App() {
 
   useEffect(() => {
     const userInfo = auth.onAuthStateChanged((user) => {
+      dispatch(setCurrentBlogs(blogArray));
+      dispatch(setIsLoading(isLoading));
       if (!user) {
         return;
       }
@@ -27,8 +29,6 @@ function App() {
       };
 
       dispatch(setCurrentUser(userSum));
-      dispatch(setCurrentBlogs(blogArray));
-      dispatch(setIsLoading(isLoading));
     });
     return userInfo; //! clean-up function
   }, [dispatch, blogArray, isLoading]);

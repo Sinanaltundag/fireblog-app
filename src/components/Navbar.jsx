@@ -8,10 +8,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { AccountCircle } from "@mui/icons-material";
 import cwLogo from "../assets/cw.jpeg";
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Heading from "./Heading";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from "../utils/firebase";
@@ -19,12 +19,9 @@ import { clearCurrentUser } from "../redux/actions/authActions";
 import { useState } from "react";
 
 export default function MenuAppBar() {
-
-
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -33,54 +30,45 @@ export default function MenuAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleLogout =()=>{
+  const handleLogout = () => {
     logout();
-    dispatch(clearCurrentUser())
-    console.log(currentUser)
+    dispatch(clearCurrentUser());
     handleClose();
-    navigate("/")
-  }
+    navigate("/");
+  };
 
-  
-  const {currentUser} = useSelector((state)=>state.auth)
-
-
+  const { currentUser } = useSelector((state) => state.auth);
 
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('md'));
-console.log(currentUser?.displayName);
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <Box sx={{ flexGrow: 1 }}>
- 
       <AppBar position="fixed">
         <Toolbar>
           <Link to={"/"}>
             <img src={cwLogo} alt="" width="40" />
           </Link>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-           {matches&&(
-            <Link to={"/"}>
-             <Heading title={"<Sinan/> Blog"} color="white"/>
-             </Link>
-           ) }
+            {matches && (
+              <Link to={"/"}>
+                <Heading title={"<Sinan/> Blog"} color="white" />
+              </Link>
+            )}
           </Typography>
-            <Typography variant="h5" >
-              {currentUser?.displayName}
-            </Typography>
-            <div>
-            
-          
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-          {currentUser ? (
+          <Typography variant="h5">{currentUser?.displayName}</Typography>
+          <div>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            {currentUser ? (
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -96,13 +84,16 @@ console.log(currentUser?.displayName);
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-              <MenuItem onClick={handleClose} component={Link} to="/profile" >Profile </MenuItem>
-              <MenuItem onClick={handleClose} component={Link} to="/new-blog" >New </MenuItem>
-              <MenuItem onClick={handleLogout}  >Logout </MenuItem>
-  
+                <MenuItem onClick={handleClose} component={Link} to="/profile">
+                  Profile{" "}
+                </MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to="/new-blog">
+                  New{" "}
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>Logout </MenuItem>
               </Menu>
-          ):(
-            <Menu
+            ) : (
+              <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -117,11 +108,15 @@ console.log(currentUser?.displayName);
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose} component={Link} to="/login" >Login </MenuItem>
-                <MenuItem onClick={handleClose} component={Link} to="/register" >Register </MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to="/login">
+                  Login{" "}
+                </MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to="/register">
+                  Register{" "}
+                </MenuItem>
               </Menu>
-          )}
-            </div>
+            )}
+          </div>
         </Toolbar>
       </AppBar>
     </Box>
